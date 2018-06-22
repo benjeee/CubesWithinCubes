@@ -41,6 +41,11 @@ public class PlayerController : MonoBehaviour {
             velocity.y = -speed;
         }
 
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            velocity *= 3;
+        }
+
         motor.Move(velocity);   
 
         float yRot = Input.GetAxisRaw("Mouse X");
