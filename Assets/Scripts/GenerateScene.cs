@@ -58,28 +58,11 @@ public class GenerateScene : MonoBehaviour {
         float yScale = Random.Range(minScale, maxScale);
         float zScale = Random.Range(minScale, maxScale);
 
-        Debug.Log("X: " + xScale + ", Y: " + yScale + ", Z: " + zScale);
         return new Vector3(
             parentScale.x * xScale,
             parentScale.y * yScale,
             parentScale.x * zScale
         );
-    }
-
-    public static float NextGaussianFloat()
-    {
-        float u, v, S;
-
-        do
-        {
-            u = 2.0f * Random.value - 1.0f;
-            v = 2.0f * Random.value - 1.0f;
-            S = u * u + v * v;
-        }
-        while (S >= 1.0);
-
-        float fac = Mathf.Sqrt(-2.0f * Mathf.Log(S) / S);
-        return u * fac;
     }
 
     void GenerateLayer(Transform parent, int layersRemaining, int numTries)
@@ -183,17 +166,6 @@ public class GenerateScene : MonoBehaviour {
         }
         return true;
     }
-
-    /*
-    bool dotProductBetween(Vector3 x, Vector3 P, Vector3 Q)
-    {
-        Vector3 i = Q - P;
-        Vector3 v = x - Q;
-        float vi = Vector3.Dot(v, i);
-        return 0 < vi && vi < Vector3.Dot(i, i);
-    }
-    */
-
         
     bool cubeInsideCube(Transform smallCube, Transform bigCube)
     {
@@ -253,24 +225,6 @@ public class GenerateScene : MonoBehaviour {
         cornerList[5] = m.MultiplyPoint3x4(new Vector3(-scale.x / 2, scale.y / 2, -scale.z / 2));
         cornerList[6] = m.MultiplyPoint3x4(new Vector3(-scale.x / 2, -scale.y / 2, scale.z / 2));
         cornerList[7] = m.MultiplyPoint3x4(new Vector3(-scale.x / 2, -scale.y / 2, -scale.z / 2));
-
-        return cornerList;
-    }
-
-
-    Vector3[] GetDiagonalCorners(Transform cube)
-    {
-        Vector3[] cornerList = new Vector3[2];
-
-
-        Quaternion rotation = cube.rotation;
-        Matrix4x4 m = Matrix4x4.TRS(new Vector3(0, 0, 0), rotation, new Vector3(1, 1, 1));
-
-        Vector3 bl = new Vector3(cube.localPosition.x - cube.lossyScale.x / 2, cube.localPosition.y - cube.lossyScale.y / 2, cube.localPosition.z - cube.lossyScale.z / 2);
-        cornerList[0] = m.MultiplyPoint3x4(bl);
-
-        Vector3 tr = new Vector3(cube.localPosition.x + cube.lossyScale.x / 2, cube.localPosition.y + cube.lossyScale.y / 2, cube.localPosition.z + cube.lossyScale.z / 2);
-        cornerList[1] = m.MultiplyPoint3x4(tr);
 
         return cornerList;
     }

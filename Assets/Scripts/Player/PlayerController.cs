@@ -32,18 +32,19 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 velocity = (movHorizontal + movVertical).normalized * speed;
 
-        
-        if (Input.GetButton("Jump"))
-        {
-            velocity.y = speed;
-        } else if (Input.GetKey(KeyCode.LeftControl))
-        {
-            velocity.y = -speed;
-        }
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
             velocity *= 3;
+        }
+
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if(scroll < 0)
+        {
+            speed /= 1.5f;
+        } else if(scroll > 0)
+        {
+            speed *= 1.5f;
         }
 
         motor.Move(velocity);   
@@ -53,9 +54,6 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 playerRotation = new Vector3(-xRot, yRot, 0f) * sens;
         motor.Rotate(playerRotation);
-
-        //float camRotation = xRot * sens;
-        //motor.CamRotate(camRotation);
     }
 
 
