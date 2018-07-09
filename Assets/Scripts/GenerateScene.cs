@@ -194,7 +194,6 @@ public class GenerateScene : MonoBehaviour {
         return min < uX && uX < max;
     }
 
-
     Vector3[] Get4Corners(Transform cube)
     {
         Quaternion rotation = cube.rotation;
