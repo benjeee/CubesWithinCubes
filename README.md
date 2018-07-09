@@ -1,5 +1,5 @@
 # CubesWithinCubes
-Procedurally generated 3Dart demo with @babyshoes!
+Procedurally generated 3Dart demo with @babyshoes !
 
 The gist: tries to stick as many cubes into a parent cube as it can. Then recursively tries to stick more cubes in those cubes.
 Prone to crash ~5 levels deep
